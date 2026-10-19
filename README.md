@@ -1,157 +1,169 @@
-# CareerPilot AI — Fetch-A-Thon 3.0 project
+#  CareerPilot — AI Career Planning Agent
 
-![tag:innovationlab](https://img.shields.io/badge/innovationlab-3D8BD3) ![tag:hackathon](https://img.shields.io/badge/hackathon-5F43F1)
+**From career goals to an actionable learning roadmap.**
 
-**Purpose:** Help students turn an internship/career goal into an actionable skill-gap plan, curated learning resources, and relevant open-source project examples.
+CareerPilot is an AI-powered career-planning agent that helps students, beginners, and job seekers understand the skills they need, create structured study plans, discover learning resources, and explore relevant GitHub projects.
 
-This repository is designed as a strong starting implementation for Fetch-A-Thon 3.0. It combines:
-- Fetch.ai `uagents` with the standard chat protocol used by ASI:One-compatible agents, mailbox mode, and published agent details.
-- ASI:One (`asi1`) as the core reasoning model.
-- Real tool calling: skill-gap analysis, learning-resource lookup, study-plan generation, and live GitHub repository search.
-- Local tests and documented deployment steps.
+Built for the **Fetch-A-Thon 3.0 — ASI:One Agent Challenge**.
 
-See [`REQUIREMENTS_MATRIX.md`](REQUIREMENTS_MATRIX.md) for the requirement-by-requirement status and [`SUBMISSION_DESCRIPTION.md`](SUBMISSION_DESCRIPTION.md) for a Devpost draft.
+##  Problem Statement
 
-## Important distinction: code vs. external submission steps
+Students and aspiring professionals often struggle to decide which skills to learn, which resources to trust, and how to turn a career goal into a practical plan. CareerPilot brings these steps together in one AI-powered conversation.
 
-The code cannot register itself into your personal Agentverse account or publish a public GitHub repository/video without you logging into those services. **Do not claim the submission is complete until you deploy it, verify it inside ASI:One, publish the repository, and capture the required links.** Agentverse UI/SDK details can change; use the current official guides linked below.
+##  Our Solution
 
-## Agent identity (fill after deployment)
+CareerPilot takes a user's career goal and current skill level and helps turn them into a practical learning roadmap. It combines career guidance with tools that analyze skill gaps, create study plans, find learning resources, and search GitHub project examples.
 
-- Agent name: `careerpilot_ai`
-- Agent address: **add the actual deployed address here after Agentverse deployment**
-- Agentverse profile: **add the real profile URL after registration**
-- ASI:One shared chat: **add the real shared-chat URL after end-to-end testing**
+##  Key Features
 
-## Features / judging requirements mapping
+- **Skill Gap Analysis:** Identifies skills a user may need to develop for a target career.
+- **Personalized Study Plans:** Creates structured learning schedules based on the user's goals and current knowledge.
+- **Learning Resource Discovery:** Recommends relevant tutorials, documentation, and learning platforms.
+- **GitHub Project Discovery:** Finds example repositories that can inspire portfolio projects.
+- **Conversational Career Guidance:** Lets users describe their goals naturally and receive an organized response.
 
-| Hackathon item | Included in this project | Still needs your action |
-|---|---|---|
-| Clear real-world problem | Career and internship preparation | Explain impact in your submission |
-| Multi-step planning/reasoning | ASI:One tool-calling loop plus plan generation | Test representative prompts |
-| Meaningful tool execution | Skill-gap planner, curated resources, live GitHub API search | Confirm internet/API availability |
-| Agent Chat Protocol | `uagents_core` chat protocol handler | Deploy and verify in ASI:One |
-| ASI:One as core reasoning | Direct `https://api.asi1.ai/v1/chat/completions` integration, model `asi1` | Add your API key |
-| Agentverse discoverability | Agent configured to publish chat manifest | Register/deploy it in your account and verify listing |
-| Workflow in ASI:One | Chat protocol reply calls the complete workflow | Test the live shared conversation |
-| Public GitHub | README and `.gitignore` included | Push repo publicly and add badge/category |
-| Demo + shared URLs | Submission checklist included | Record demo and capture real URLs |
+##  Technology Stack
 
-Optional bonus features (multi-agent, Payment Protocol, Interactive Cards) are not falsely claimed as implemented. Prioritize mandatory requirements first.
+- **Python** — core agent implementation
+- **ASI:One** — conversational AI experience
+- **ASI:One API** — AI-powered responses
+- **Fetch.ai uAgents / Agentverse** — agent development and registration
+- **Tool-based workflow** — connects career-planning requests to specialized functions
 
-## Requirements
+##  How It Works
 
-- Python 3.10 or 3.11 recommended
-- VS Code
-- Internet connection
-- ASI:One API key (required for full AI reasoning; create it in the ASI:One Developer area)
-- Agentverse account for deployment
+1. The user describes a career goal and current skills.
+2. CareerPilot analyzes the user's needs.
+3. It uses tools for skill-gap analysis, study-plan creation, learning-resource discovery, and GitHub project search.
+4. The results are combined into an actionable career roadmap.
+5. The user can ask follow-up questions to refine the plan.
 
-Official documentation:
-- ASI:One developer quickstart: https://docs.asi1.ai/documentation/getting-started/quickstart
-- ASI:One tool calling: https://docs.asi1.ai/documentation/build-with-asi-one/tool-calling
-- uAgents docs: https://uagents.fetch.ai/docs
-- Fetch.ai event brief: https://innovationlab.fetch.ai/
+##  Getting Started
 
-## Windows + VS Code: install and run
+### Prerequisites
 
-### 1. Extract and open
-Extract the ZIP, open the `Fetchathon_CareerPilot` folder in VS Code, then choose **Terminal → New Terminal**.
+- Python installed
+- Git installed
+- An ASI:One API key
+- A private agent seed for your own agent setup
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Nandinigupta6568/Career_Pilot_AI-JNSpark.git
+```
 
 ### 2. Create a virtual environment
-In PowerShell:
+
+**Windows:**
+
 ```powershell
 py -m venv .venv
-.\.venv\Scripts\Activate.ps1
-```
-If PowerShell blocks activation, use a VS Code Command Prompt terminal:
-```bat
-.venv\Scripts\activate.bat
+.venv\Scripts\activate
 ```
 
-### 3. Install packages
+### 3. Install dependencies
+
 ```powershell
-python -m pip install --upgrade pip
-pip install -r requirements.txt
+py -m pip install -r requirements.txt
 ```
 
-### 4. Configure ASI:One
-Copy `.env.example` to `.env` and add your own key:
-```env
-ASI_ONE_API_KEY=PASTE_YOUR_REAL_KEY_HERE
-ASI_ONE_BASE_URL=https://api.asi1.ai/v1
-ASI_ONE_MODEL=asi1
-# Optional stable identity seed; use a unique private value only
-CAREERPILOT_AGENT_SEED=
-```
-Get a key through the ASI:One developer portal. Never share it or commit `.env`. The `.gitignore` already excludes `.env`.
+### 4. Configure environment variables
 
-### 5. Run tests and preflight checks
+Copy `.env.example` to `.env` and fill in the required values using your own API key and private agent seed.
+
 ```powershell
-python -m unittest discover -s tests -v
-python scripts/preflight.py
-python scripts/check_asi_one.py
+Copy-Item .env.example .env
 ```
-The API check makes a real, small ASI:One request and may consume a small amount of API quota. It never prints your key.
 
-### 6. Run local CLI test
+Open `.env` in and update the following variables according to the names already defined in `.env.example`.
+
+| Variable | What to enter |
+|---|---|
+| `ASI_ONE_API_KEY` | Your own valid ASI:One API key. Never use someone else's private key (sk_6625590b3a174c768c5e231dd38bd69da2bc07d764f0408ebbe71c21960c3423). |
+| `CAREERPILOT_AGENT_SEED` | A unique private seed generated for your own agent identity. |
+
+**Important:** The variable names above must match those in your actual `.env.example` file. If your project uses different names, use the exact names provided in that file.
+
+#### Generate a private agent seed
+
+Generate a random seed using Python:
+
 ```powershell
-python main.py
+py -c "import secrets; print(secrets.token_hex(32))"
 ```
-Try:
-> I want a Data Analyst internship in 6 weeks. I know basic Python and SQL. Find projects I can build and make a study plan.
 
-The program will use ASI:One if configured. Without a key, the CLI will clearly report that AI mode is not enabled and offer a local diagnostic rather than pretending that an LLM response was generated.
+Copy the generated value into the `CAREERPILOT_AGENT_SEED` variable in `.env`, then save the file.
 
-### 7. Run the uAgent
-Open a second terminal in VS Code:
+Each person registering their own agent should use a unique seed.
+
+
+### Step 5: Verify your configuration
+
+After saving `.env`, run:
+
 ```powershell
-.\.venv\Scripts\Activate.ps1
-python agent.py
+py -m scripts.preflight
 ```
-Keep it running. The agent is configured with `mailbox=True`, publishes its chat protocol manifest, and publishes agent details. Follow the current Agentverse prompts/logs to complete mailbox authorization and registration. A local run does **not** by itself prove that the agent is discoverable or usable in ASI:One.
 
-## Agentverse / ASI:One deployment checklist
+If the configuration check passes, verify the API connection:
 
-1. Confirm `python agent.py` starts without errors.
-2. Create/sign in to Agentverse.
-3. Follow the current official “create an ASI:One-compatible uAgent” workflow. This code uses `mailbox=True`, `publish_agent_details=True`, `chat_protocol_spec`, and `publish_manifest=True`; complete any Agentverse authorization/registration prompts shown by the current tooling.
-4. Ensure the agent is categorized under **Innovation Lab**.
-5. In the agent README / project README include these exact badges:
-   ```markdown
-   ![tag:innovationlab](https://img.shields.io/badge/innovationlab-3D8BD3)
-   ![tag:hackathon](https://img.shields.io/badge/hackathon-5F43F1)
-   ```
-6. Verify that the deployed agent is discoverable and directly callable through ASI:One.
-7. In ASI:One, test a complete request such as: “Help me prepare for a data analyst internship in six weeks. Check my skills, build a plan, find learning resources, and find example GitHub projects.”
-8. Capture the **real** Agentverse profile URL and the **public ASI:One shared-chat URL** after the test succeeds.
-9. Push the code to a public GitHub repository. Add the actual deployed agent address to this README; do not invent one.
-10. Record a 3–5 minute demo showing the full ASI:One workflow and tool results.
+```powershell
+py -m scripts.check_asi_one
+```
 
-## Submission description starter
 
-- **Problem:** Students often do not know which skills to learn or how to turn a career goal into a practical plan.
-- **Target users:** Students and early-career applicants preparing for internships.
-- **Outcome:** A personalized skill-gap summary, time-boxed action plan, verified learning links, and examples of open-source projects to study.
-- **Tools:** ASI:One reasoning/tool calling, deterministic skill analysis, curated learning-resource catalog, and GitHub's public repository search API.
+### 5. Run the preflight check
 
-## What is implemented vs. what must be verified
+```powershell
+py -m scripts.preflight
+```
 
-Implemented in code: ASI:One API client with bounded function calling, allowlisted career tools, GitHub repository search, uAgents chat-protocol handler, mailbox configuration, manifest publishing, local tests, and setup/deployment documentation.
+### 6. Check the ASI:One API connection
 
-Account/deployment tasks that cannot be completed by a ZIP: creating your ASI:One key and private seed, authorizing/registering the agent in your Agentverse account, setting the Innovation Lab category in the platform, verifying ASI:One discovery, publishing the repository publicly, generating a shared-chat URL, and recording the demo video. Payment Protocol and Interactive Cards are optional bonus items and are not implemented in this version. Do not mark those items complete until you have verified them live.
+```powershell
+py -m scripts.check_asi_one
+```
 
-## Troubleshooting
+### 7. Start the agent
 
-- `py` is not recognized: install Python from https://www.python.org/downloads/ and enable “Add Python to PATH”; restart VS Code.
-- `ModuleNotFoundError`: activate `.venv`, then run `pip install -r requirements.txt`.
-- `401 Unauthorized`: verify `ASI_ONE_API_KEY` and ensure it is active.
-- `402 Payment Required` / quota errors: check API access and account usage.
-- GitHub API rate limit: wait and retry; unauthenticated search has rate limits.
-- Agentverse/ASI:One cannot see the agent: local execution alone is not deployment. Follow the current Agentverse deployment workflow and check the manifest/protocol.
+```powershell
+py agent.py
+```
 
-## Security
+Keep the terminal open while testing the local agent.
 
-- Keep `.env` private; never paste your API key into chat or commit it.
-- This project does not buy courses, apply for jobs, or submit forms automatically.
-- GitHub search results are untrusted external data; the agent summarizes them but should not execute code from repositories.
+##  Project Links
+
+- **ASI:One Demo:** https://asi1.ai/chat/19ca7341-b213-4886-9b99-b0883a695c0a?from=profile&handle=career-pilot-ai
+- **Agentverse Profile:** https://agentverse.ai/agents/details/agent1qvcywc2skafar0p0ds0z2jus4msq2d9lvxkwwxrwpmx2cdfex0dk2hvf0y5/profile
+- **GitHub Repository:** https://github.com/Nandinigupta6568/Career_Pilot_AI-JNSpark.git
+
+##  Target Users
+
+- Students exploring career options
+- Beginners entering the technology industry
+- Job seekers preparing for internships and entry-level roles
+- Self-learners building technical skills and portfolios
+
+##  Future Improvements
+
+- More personalized recommendations based on a user's progress
+- Interactive learning-plan cards
+- Integration with additional career and learning data sources
+- Multi-agent collaboration for deeper career research
+- Progress tracking and portfolio milestones
+
+##  Security
+
+CareerPilot uses environment variables for sensitive configuration. Keep API keys and private agent seeds out of source control. Users deploying their own agent should configure their own credentials.
+
+##  Built For
+
+**Fetch-A-Thon 3.0 — ASI:One Agent Challenge**
+
+CareerPilot aims to make career planning more structured, accessible, and actionable by turning a user's intent into a practical next step.
+
+---
+
+*Built with Python, ASI:One, and Fetch.ai agent technology.*
