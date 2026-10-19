@@ -1,0 +1,4 @@
+uagents>=0.22.0
+python-dotenv>=1.0.1
+requests>=2.32.0
+# ASI:One uses an OpenAI-compatible HTTP API via requests; no OpenAI SDK needed.
