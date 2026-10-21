@@ -80,7 +80,7 @@ Open `.env` in and update the following variables according to the names already
 
 | Variable | What to enter |
 |---|---|
-| `ASI_ONE_API_KEY` | Your own valid ASI:One API key. Never use someone else's private key (sk_6625590b3a174c768c5e231dd38bd69da2bc07d764f0408ebbe71c21960c3423). |
+| `ASI_ONE_API_KEY` | Your own valid ASI:One API key. Never use someone else's private key. |
 | `CAREERPILOT_AGENT_SEED` | A unique private seed generated for your own agent identity. |
 
 **Important:** The variable names above must match those in your actual `.env.example` file. If your project uses different names, use the exact names provided in that file.
